@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://damsiothnnr1g"]
+
+[ext_resource type="Script" path="res://collector.gd" id="1_qarv0"]
+
+[sub_resource type="SystemFont" id="SystemFont_a7hpj"]
+font_names = PackedStringArray("Tahoma")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qarv0")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="collect" type="Button" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "Collect"
+
+[node name="collected" type="Label" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_a7hpj")
+theme_override_font_sizes/font_size = 24
+text = "-----"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="generator" type="Label" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_a7hpj")
+theme_override_font_sizes/font_size = 24
+text = "0000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="quit" type="Button" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "EXIT"
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="pressed" from="CenterContainer/HBoxContainer/collect" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/quit" to="." method="_on_quit_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

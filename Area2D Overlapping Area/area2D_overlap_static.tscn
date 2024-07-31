@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4f43c0essq7o"]
+
+[ext_resource type="Script" path="res://area_2d_overlap_static.gd" id="1_wsyep"]
+[ext_resource type="Texture2D" uid="uid://b7486opq2ekjo" path="res://godot-shape-test-1.png" id="2_5khgg"]
+[ext_resource type="Texture2D" uid="uid://07jcxd7gbv85" path="res://godot-shape-test-2.png" id="3_rwp2u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0uudx"]
+size = Vector2(141, 123)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qit5c"]
+size = Vector2(215, 137)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_wsyep")
+
+[node name="Area2D_1" type="Area2D" parent="."]
+disable_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_1"]
+position = Vector2(183.5, 87.5)
+shape = SubResource("RectangleShape2D_0uudx")
+
+[node name="TextureRect" type="TextureRect" parent="Area2D_1"]
+offset_left = 113.0
+offset_top = 26.0
+offset_right = 254.0
+offset_bottom = 149.0
+texture = ExtResource("2_5khgg")
+expand_mode = 1
+
+[node name="Area2D_2" type="Area2D" parent="."]
+disable_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_2"]
+position = Vector2(291.5, 142.5)
+shape = SubResource("RectangleShape2D_qit5c")
+
+[node name="TextureRect" type="TextureRect" parent="Area2D_2"]
+offset_left = 184.0
+offset_top = 74.0
+offset_right = 400.0
+offset_bottom = 212.0
+texture = ExtResource("3_rwp2u")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 128.0
+offset_top = 282.0
+offset_right = 261.0
+offset_bottom = 305.0
+text = "Intersect %=0000"
+
+[connection signal="area_shape_entered" from="Area2D_1" to="." method="_on_area_2d_1_area_shape_entered"]
+[connection signal="area_shape_exited" from="Area2D_1" to="." method="_on_area_2d_1_area_shape_exited"]
+[connection signal="area_shape_entered" from="Area2D_2" to="." method="_on_area_2d_2_area_shape_entered"]
+[connection signal="area_shape_exited" from="Area2D_2" to="." method="_on_area_2d_2_area_shape_exited"]

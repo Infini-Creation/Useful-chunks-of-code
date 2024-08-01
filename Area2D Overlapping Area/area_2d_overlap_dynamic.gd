@@ -23,7 +23,7 @@ func _ready() -> void:
 	print("_ready called")
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	#if Input.is_action_pressed("up-1"):
 	#	area1.position.y -= speed * delta
 	pass
@@ -59,11 +59,9 @@ func _process(delta: float) -> void:
 		has_moved = true
 
 	if has_moved == true:
-		#refresh area so overlap signal will be send again, how ?
 		var overlaps = area1.get_overlapping_areas()
 		print("A1 overlaps:" + str(overlaps))
 		if overlaps.size() > 0:
-			#taken from signal, temporary
 			var other_shape_owner = overlaps[0].shape_find_owner(0)
 			var other_shape_node : CollisionShape2D = overlaps[0].shape_owner_get_owner(other_shape_owner)
 			print("AREA1: OSO=" + str(other_shape_owner)+" OSN="+ str(other_shape_node))
@@ -117,62 +115,6 @@ func _process(delta: float) -> void:
 
 
 func _draw() -> void:
-	#print("ra="+str(rect_alpha) + "  di="+str(debug_intersect))
-	
 	if debug_intersect != null:
 		draw_rect(debug_intersect, Color(1.0, 1.0, 1.0, rect_alpha))
 		rect_alpha = abs(sin(time))
-
-		#draw_rect(Rect2(Vector2(10,10), Vector2(100,100)), Color(1.0, 1.0, 1.0, rect_alpha))
-
-
-func _on_area_2d_1_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
-	print("Area1: shape ent sig: area="+str(area))
-	var other_shape_owner = area.shape_find_owner(area_shape_index)
-	var other_shape_node : CollisionShape2D = area.shape_owner_get_owner(other_shape_owner)
-	print("AREA1: shape entered OSO=" + str(other_shape_owner)+" OSN="+ str(other_shape_node))
-
-	var local_shape_owner = area1.shape_find_owner(local_shape_index)
-	var local_shape_node : CollisionShape2D = area1.shape_owner_get_owner(local_shape_owner)
-	print("AREA1: shape entered LSO=" + str(local_shape_owner)+" LSN="+ str(local_shape_node))
-	
-	var other_glob_tranf = other_shape_node.get_global_transform()
-	var local_glob_transf = local_shape_node.get_global_transform()
-	print("other glotransf="+str(other_glob_tranf))
-	print("local glotransf="+str(local_glob_transf))
-	
-	var other_rect : Rect2 = other_shape_node.shape.get_rect()
-	other_rect.position += other_glob_tranf.origin
-	var local_rect : Rect2 = local_shape_node.shape.get_rect()
-	local_rect.position += local_glob_transf.origin
-	print("other rect="+str(other_rect))
-	print("local rect="+str(local_rect))
-	
-	drop_area_surface = local_rect.get_area()
-	moving_area_surface = other_rect.get_area()
-
-	var intersect : Rect2 = local_rect.intersection(other_rect)
-	var surface = intersect.get_area()
-	print("Intersect="+str(intersect)+" area="+str(surface))
-	debug_intersect = intersect
-	
-
-# pb signals not send when area are still overlap but change!
-#trigger the sign manually on move ?
-func _on_area_2d_1_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
-	print("Area1: shape exit sig: area="+str(area))
-
-
-func _on_area_2d_2_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
-	print("Area2: shape ent sig: area="+str(area))
-	var other_shape_owner = area.shape_find_owner(area_shape_index)
-	var other_shape_node : CollisionShape2D = area.shape_owner_get_owner(other_shape_owner)
-	print("AREA2: shape entered OSO=" + str(other_shape_owner)+" OSN="+ str(other_shape_node))
-
-	var local_shape_owner = area2.shape_find_owner(local_shape_index)
-	var local_shape_node = area2.shape_owner_get_owner(local_shape_owner)
-	print("AREA2: shape entered LSO=" + str(local_shape_owner)+" LSN="+ str(local_shape_node))
-
-
-func _on_area_2d_2_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
-	print("Area1: shape exit sig: area="+str(area))

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c4f43c0essq7o"]
 
-[ext_resource type="Script" path="res://area_2d_overlap_static.gd" id="1_wsyep"]
+[ext_resource type="Script" uid="uid://bq5u3mh63lajr" path="res://area_2d_overlap_static.gd" id="1_wsyep"]
 [ext_resource type="Texture2D" uid="uid://b7486opq2ekjo" path="res://godot-shape-test-1.png" id="2_5khgg"]
 [ext_resource type="Texture2D" uid="uid://07jcxd7gbv85" path="res://godot-shape-test-2.png" id="3_rwp2u"]
 

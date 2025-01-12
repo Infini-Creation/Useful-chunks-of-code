@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://4057vd8h3l12"]
 
 [ext_resource type="Texture2D" uid="uid://b7486opq2ekjo" path="res://godot-shape-test-1.png" id="1_cirh2"]
-[ext_resource type="Script" path="res://area_2d_overlap_dynamic.gd" id="1_geo65"]
+[ext_resource type="Script" uid="uid://cefsj3wnqdyqn" path="res://area_2d_overlap_dynamic.gd" id="1_geo65"]
 [ext_resource type="Texture2D" uid="uid://07jcxd7gbv85" path="res://godot-shape-test-2.png" id="2_jii7t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kmtnr"]

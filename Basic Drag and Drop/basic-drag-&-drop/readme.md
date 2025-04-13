@@ -5,3 +5,5 @@ puzzle game where the played have to put object on the board, whatever, all 2D f
 
 ![ucof-basic DD 1](https://github.com/user-attachments/assets/2f7344dc-0cac-4664-87b5-c9c61371f968)
 ![ucof-basic DD 2](https://github.com/user-attachments/assets/02f79770-6a20-4937-bf03-2f8e02571295)
+
+There is an additionnal zoom effect while dragging the object, this can be modified/tuned making a shadow, adding particles or any other Node2D VFX features.

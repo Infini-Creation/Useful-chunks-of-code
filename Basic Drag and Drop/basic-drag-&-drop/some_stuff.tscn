@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://ho2u33bvb6j"]
+
+[ext_resource type="Script" uid="uid://6l0drogm4f16" path="res://some_stuff.gd" id="1_4auk8"]
+[ext_resource type="Texture2D" uid="uid://bn35yr4rmbgqw" path="res://ucoc-simpleDD-1.png" id="2_0u0hm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0u0hm"]
+size = Vector2(256, 256)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_4auk8")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_0u0hm")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-128, -128)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(128, 128)
+shape = SubResource("RectangleShape2D_0u0hm")
+
+[connection signal="mouse_entered" from="TextureRect" to="." method="_on_texture_rect_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect" to="." method="_on_texture_rect_mouse_exited"]

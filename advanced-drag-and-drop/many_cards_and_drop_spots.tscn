@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dt4j4oclqpmv"]
+
+[ext_resource type="Script" uid="uid://lkm2pqavpw0m" path="res://many_cards_and_drop_spots.gd" id="1_okfwn"]
+
+[node name="Many Cards and DropSpots" type="Node2D"]
+script = ExtResource("1_okfwn")

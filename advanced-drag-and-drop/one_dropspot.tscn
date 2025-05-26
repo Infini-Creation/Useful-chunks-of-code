@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://dgefsu5qe6pj7"]
 
-[ext_resource type="Script" uid="uid://vc38cj74rsk1" path="res://main_scene.gd" id="1_0f027"]
+[ext_resource type="Script" uid="uid://vc38cj74rsk1" path="res://one_dropspot.gd" id="1_fnbop"]
 
 [node name="MainScene" type="Node2D"]
-script = ExtResource("1_0f027")
+script = ExtResource("1_fnbop")
 
 [node name="cardSpot" type="Node2D" parent="."]
 position = Vector2(266, 327)

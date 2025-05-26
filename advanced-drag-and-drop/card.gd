@@ -2,11 +2,16 @@ extends Node2D
 class_name Card
 
 @export var cid : int = -1
-var locked : bool = false
-
 
 var mouseInsideCardArea : bool = false
-var is_dragged : bool = false
+#var is_dragged : bool = false
+
+#signal dragged
+#signal dropped
+var dragged : bool = false
+var dropped : bool = true
+var locked : bool = false
+
 
 signal card_is_dropped(ref : Node2D, coordinates : Vector2)
 
@@ -16,7 +21,31 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	pass
+	if mouseInsideCardArea == true:
+		print("Card MC="+str(get_viewport().get_mouse_position()))
+	print("Dragged="+str(dragged)+"  Dropped="+str(dropped))
+	if dragged == true:
+		global_position = get_viewport().get_mouse_position()
+
+
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_pressed("PickItem"):
+		print("pickitem action pressed")
+		if dragged == false and dropped == true:
+			if locked == false:
+				if mouseInsideCardArea == true:
+					global_position = get_viewport().get_mouse_position()
+					scale_up()
+					dragged = true
+					dropped = false
+
+	if Input.is_action_just_released("PickItem"):
+		print("pickitem action released")
+		if dragged == true:
+			dropped = true
+			scale_down()
+			dragged = false
+			card_is_dropped.emit(self, global_position)
 
 
 func is_mouse_inside() -> bool:
@@ -24,6 +53,7 @@ func is_mouse_inside() -> bool:
 
 
 func _on_area_2d_mouse_entered() -> void:
+	print("Card MC="+str(get_viewport().get_mouse_position()))
 	mouseInsideCardArea = true
 
 
@@ -31,12 +61,13 @@ func _on_area_2d_mouse_exited() -> void:
 	mouseInsideCardArea = false
 
 
-func drag() -> void:
-	print("card is dragged")
+# ~ scaleup ? movecard ? moving ?
+func scale_up() -> void:
+	print("card is scaled up")
 	scale *= 1.10
 	
-	
-func drop() -> void:
-	print("card is dropped")
+# scaleback ?
+func scale_down() -> void:
+	print("card is scaled down")
 	scale *= 0.90
-	card_is_dropped.emit(self, global_position)
+	##card_is_dropped.emit(self, global_position)

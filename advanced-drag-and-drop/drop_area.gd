@@ -4,7 +4,7 @@ class_name DropArea
 
 @export var did : int = -1
 
-@export var SnapDistanceThreshold : float = 65.0
+@export var SnapDistanceThreshold : float = 85.0
 @export var SnapEnabled : bool = false
 @export var keepObject : bool = false
 @export var rotAngle : float = 0.0
@@ -63,7 +63,11 @@ func grabObject(something : Node2D) -> void:
 			grabbed_something.emit(something) #signal ~useless
 			full = true
 			#tween here
-			something.global_position = global_position
+			animation = self.create_tween().set_parallel(false)
+			var tp : PropertyTweener = animation.parallel().tween_property(something, "global_position", global_position, 0.25)
+			tp.set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_OUT_IN)
+			
+			##something.global_position = global_position
 			if keepObject == true:
 				something.locked = true
 	else:

@@ -6,12 +6,7 @@ extends Node2D
 var cardInstance
 var dropareaInstance
 
-var dragged : bool = false
-var dropped : bool = true
-
-var lastCardPosition : Vector2i = Vector2i.ZERO
-var debugProcessDelay : int = 0
-
+var get_back : bool = false
 
 func _ready() -> void:
 	cardInstance = cardScene.instantiate()
@@ -35,3 +30,7 @@ func _process(delta: float) -> void:
 
 func _input(_event: InputEvent) -> void:
 	pass
+
+
+func _on_button_pressed() -> void:
+	get_back = true

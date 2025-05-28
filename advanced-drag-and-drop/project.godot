@@ -11,6 +11,8 @@ config_version=5
 [application]
 
 config/name="Advanced Drag And Drop"
+config/description="A little set of advanced Darg & Drop feature using some kind of cards and drop spot."
+run/main_scene="uid://6airleyxls7d"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 

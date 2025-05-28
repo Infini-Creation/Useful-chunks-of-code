@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://6airleyxls7d"]
+
+[ext_resource type="Script" uid="uid://bevqsvrn7bqew" path="res://scene_selection.gd" id="1_ca4s0"]
+
+[node name="SceneSelection" type="Node2D"]
+script = ExtResource("1_ca4s0")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "Simple Dropspot"
+
+[node name="Button2" type="Button" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "Rotated drop spot"
+
+[node name="Button3" type="Button" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "Multiple drop spots"
+
+[connection signal="pressed" from="CenterContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/Button3" to="." method="_on_button_3_pressed"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://pwphjsvy271e" path="res://rotated_cd_scene.gd" id="1_808yo"]
 
-[node name="MainScene" type="Node2D"]
+[node name="RotatedDropSpot" type="Node2D"]
 script = ExtResource("1_808yo")
 
 [node name="cardSpot" type="Node2D" parent="."]
@@ -30,3 +30,12 @@ text = "Rotated Drop spot"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="."]
+offset_left = 39.0
+offset_top = 599.0
+offset_right = 47.0
+offset_bottom = 607.0
+text = "Back"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

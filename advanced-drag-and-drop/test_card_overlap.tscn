@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq3nd2u20q7h1"]
+
+[ext_resource type="PackedScene" uid="uid://d3jdky0y5xplv" path="res://card.tscn" id="1_lvwg2"]
+
+[node name="test-card-overlap" type="Node2D"]
+
+[node name="Card2" parent="." instance=ExtResource("1_lvwg2")]
+position = Vector2(429, 283)
+cid = 2
+
+[node name="Card" parent="." instance=ExtResource("1_lvwg2")]
+position = Vector2(321, 213)
+cid = 1

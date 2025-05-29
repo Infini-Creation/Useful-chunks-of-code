@@ -4,14 +4,17 @@ class_name DropArea
 
 @export var did : int = -1
 
-@export var SnapDistanceThreshold : float = 85.0
+@export var SnapDistanceThreshold : float = 125.0 #could be greater
 @export var SnapEnabled : bool = false
 @export var keepObject : bool = false
 @export var rotAngle : float = 0.0
 
+#add maybe an area of influence, when a card is in it => start making
+# it acting differently, be more and more attracted by the dropspot center, like a blackhole
+
 signal grabbed_something(object : Node2D)
 
-var object : Node2D
+
 var CardToSpotDistance : float = 0.0
 var full : bool = false
 var object_grabbed : Node2D
@@ -28,10 +31,27 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	# assign var when known (check to be usre it still valid and/or null it when card "out of range"
+	# AFTER being rotated back
+	if object_grabbed != null:
+		CardToSpotDistance = global_position.distance_to(object_grabbed.global_position)
+		print("CSD="+str(CardToSpotDistance))
+		if CardToSpotDistance > SnapDistanceThreshold:
+			print("CD: rotate card back")
+			if object_grabbed.rotation != 0.0:
+				#object_grabbed.rotate(-PI/2)
+				animation = self.create_tween().set_parallel(false)
+				var tp : PropertyTweener = animation.parallel().tween_property(object_grabbed, "rotation", 0, 0.5)
+				tp.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+				animation.play()
+			object_grabbed = null
+			full = false
+						
 	if full == false:
 		$Label.text = "DropSpot is free"
 	else:
 		$Label.text = "Item grabbed"
+	
 
 
 func grabObject(something : Node2D) -> void:
@@ -55,6 +75,20 @@ func grabObject(something : Node2D) -> void:
 				var tp : PropertyTweener = animation.parallel().tween_property(something, "rotation", angle, 0.75)
 				tp.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 				animation.play()
+			else:
+				pass
+				#this will never be run !!!
+				#print("CD: rotation equals")
+				#if something.dragged:
+					#CardToSpotDistance = global_position.distance_to(something.global_position)
+					#print("CSD="+str(CardToSpotDistance))
+					#if CardToSpotDistance > SnapDistanceThreshold:
+						#print("CD: rotate card back")
+			# when released => rotate it back
+			# here known angle actually = 0
+			# dragged AFTER begin dropped in area
+			#		+ dist from center increase
+			
 			
 			#somewhere here manage unlocked item
 			# when dist > treshold, dropspot is free again
@@ -66,7 +100,8 @@ func grabObject(something : Node2D) -> void:
 			animation = self.create_tween().set_parallel(false)
 			var tp : PropertyTweener = animation.parallel().tween_property(something, "global_position", global_position, 0.25)
 			tp.set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_OUT_IN)
-			
+			something.did = did
+
 			##something.global_position = global_position
 			if keepObject == true:
 				something.locked = true
@@ -74,7 +109,7 @@ func grabObject(something : Node2D) -> void:
 		print("dropSpot not free")
 
 
-#~keep a globa list of cards in play and use id to get instance or just pass instance ref here
+#~keep a global list of cards in play and use id to get instance or just pass instance ref here
 func _on_card_is_dropped_received(card : Node2D, cposition : Vector2) -> void:
 	print("card dropped sig received from card "+str(card.cid)+" on position: "+str(cposition))
 	CardToSpotDistance = global_position.distance_to(cposition)
@@ -88,6 +123,7 @@ func _on_button_pressed() -> void:
 	if object_grabbed != null:
 		print("release item")
 		object_grabbed.locked = false
+		object_grabbed.did = -1
 		full = false
 
 

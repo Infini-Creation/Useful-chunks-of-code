@@ -3,11 +3,12 @@ extends Node2D
 @export var cardScene : PackedScene = preload("res://card.tscn")
 @export var DropAreaScene : PackedScene = preload("res://drop_area.tscn")
 
+@onready var label = $Label
+
 var cardInstance : Array = []
 var dropareaInstance : Array = []
 
-var dragged : bool = false
-var dropped : bool = true
+var get_back : bool = false
 
 
 func _ready() -> void:
@@ -32,20 +33,9 @@ func _ready() -> void:
 		add_child(dropareaInstance[didx])
 
 
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_pressed("PickItem"):
+func _process(_delta: float) -> void:
+	$Label.text = "Item "+str(cardInstance[0].cid)+" is on DropSpot "+str(cardInstance[0].did)+"\nItem "+str(cardInstance[1].cid)+" is on DropSpot "+str(cardInstance[1].did)
 
-		if dragged == false and dropped == true:
-			print("not dragged and dropped, take it")
 
-		else:
-			print("dragged and not yet dropped")
-
-	if Input.is_action_just_released("PickItem"):
-		if dragged == true:
-			dropped = true
-
-			dragged = false
-
-		else:
-			print("click released at "+str(get_viewport().get_mouse_position()))
+func _on_button_pressed() -> void:
+	get_back = true

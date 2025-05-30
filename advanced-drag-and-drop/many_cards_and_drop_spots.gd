@@ -28,7 +28,7 @@ func _ready() -> void:
 		dropareaInstance[didx].keepObject = true
 		for cidx in range(0, 2):
 			var connect_error = cardInstance[cidx].connect("card_is_dropped", dropareaInstance[didx]._on_card_is_dropped_received)
-			print("[d="+str(didx)+"]/[c="+str(cidx)+"] connect error ? "+str(connect_error))
+			#print("[d="+str(didx)+"]/[c="+str(cidx)+"] connect error ? "+str(connect_error))
 	
 		add_child(dropareaInstance[didx])
 

@@ -20,13 +20,9 @@ func _ready() -> void:
 	dropareaInstance.keepObject = false
 	dropareaInstance.rotAngle = 90.0
 	var connect_error = cardInstance.connect("card_is_dropped", dropareaInstance._on_card_is_dropped_received)
-	print("connect error ? "+str(connect_error))
+	#print("connect error ? "+str(connect_error))
 	
 	add_child(dropareaInstance)
-
-
-func _input(_event: InputEvent) -> void:
-	pass
 
 
 func _on_button_pressed() -> void:

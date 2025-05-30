@@ -31,15 +31,13 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	# assign var when known (check to be usre it still valid and/or null it when card "out of range"
-	# AFTER being rotated back
+
 	if object_grabbed != null:
 		CardToSpotDistance = global_position.distance_to(object_grabbed.global_position)
-		print("CSD="+str(CardToSpotDistance))
+		#print("CSD="+str(CardToSpotDistance))
 		if CardToSpotDistance > SnapDistanceThreshold:
 			print("CD: rotate card back")
 			if object_grabbed.rotation != 0.0:
-				#object_grabbed.rotate(-PI/2)
 				animation = self.create_tween().set_parallel(false)
 				var tp : PropertyTweener = animation.parallel().tween_property(object_grabbed, "rotation", 0, 0.5)
 				tp.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
@@ -55,54 +53,37 @@ func _process(_delta: float) -> void:
 
 
 func grabObject(something : Node2D) -> void:
-	print("DA["+str(did)+"]: grab object="+str(something))
+	#print("DA["+str(did)+"]: grab object="+str(something))
 	if full == false:
 		if something != null:
 			object_grabbed = something
-			if something.is_inside_tree() == true:
-				print("object already in the tree")
+			#if something.is_inside_tree() == true:
+				#print("object already in the tree")
 				#something.get_parent().remove_child(something)
 					#make object "disappear"
 			#add_child(something)
 			
-			print("object angle="+str(rad_to_deg(something.rotation)))
-			print("spot angle="+str(rad_to_deg(rotation)))
+			#print("object angle="+str(rad_to_deg(something.rotation)))
+			#print("spot angle="+str(rad_to_deg(rotation)))
 			
 			if something.rotation != rotation:
-				print("angles are not equal, rotate...")
+				#print("angles are not equal, rotate...")
 				var angle : float = rotation - something.rotation
 				animation = self.create_tween().set_parallel(false)
 				var tp : PropertyTweener = animation.parallel().tween_property(something, "rotation", angle, 0.75)
 				tp.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 				animation.play()
-			else:
-				pass
-				#this will never be run !!!
-				#print("CD: rotation equals")
-				#if something.dragged:
-					#CardToSpotDistance = global_position.distance_to(something.global_position)
-					#print("CSD="+str(CardToSpotDistance))
-					#if CardToSpotDistance > SnapDistanceThreshold:
-						#print("CD: rotate card back")
-			# when released => rotate it back
-			# here known angle actually = 0
-			# dragged AFTER begin dropped in area
-			#		+ dist from center increase
-			
-			
-			#somewhere here manage unlocked item
-			# when dist > treshold, dropspot is free again
-			# if angle modfied, item get its angle then
-			
+			#else:
+				#pass
+
 			grabbed_something.emit(something) #signal ~useless
 			full = true
-			#tween here
+
 			animation = self.create_tween().set_parallel(false)
 			var tp : PropertyTweener = animation.parallel().tween_property(something, "global_position", global_position, 0.25)
 			tp.set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_OUT_IN)
 			something.did = did
 
-			##something.global_position = global_position
 			if keepObject == true:
 				something.locked = true
 	else:
@@ -111,9 +92,9 @@ func grabObject(something : Node2D) -> void:
 
 #~keep a global list of cards in play and use id to get instance or just pass instance ref here
 func _on_card_is_dropped_received(card : Node2D, cposition : Vector2) -> void:
-	print("card dropped sig received from card "+str(card.cid)+" on position: "+str(cposition))
+	#print("card dropped sig received from card "+str(card.cid)+" on position: "+str(cposition))
 	CardToSpotDistance = global_position.distance_to(cposition)
-	print("Dist to card spot ["+str(did)+"]: "+str(CardToSpotDistance)+"  ST="+str(SnapDistanceThreshold))
+	#print("Dist to card spot ["+str(did)+"]: "+str(CardToSpotDistance)+"  ST="+str(SnapDistanceThreshold))
 	
 	if CardToSpotDistance <= SnapDistanceThreshold:
 		grabObject(card)

@@ -19,17 +19,9 @@ func _ready() -> void:
 	dropareaInstance.did = 1
 	dropareaInstance.keepObject = true
 	var connect_error = cardInstance.connect("card_is_dropped", dropareaInstance._on_card_is_dropped_received)
-	print("connect error ? "+str(connect_error))
+	#print("connect error ? "+str(connect_error))
 	
 	add_child(dropareaInstance)
-
-
-func _process(delta: float) -> void:
-	pass
-
-
-func _input(_event: InputEvent) -> void:
-	pass
 
 
 func _on_button_pressed() -> void:

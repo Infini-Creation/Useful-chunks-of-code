@@ -31,6 +31,11 @@ text = "Rotated drop spot"
 layout_mode = 2
 text = "Multiple drop spots"
 
+[node name="Button4" type="Button" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "same with card type"
+
 [connection signal="pressed" from="CenterContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/Button4" to="." method="_on_button_4_pressed"]

@@ -8,6 +8,7 @@ class_name DropArea
 @export var SnapEnabled : bool = false
 @export var keepObject : bool = false
 @export var rotAngle : float = 0.0
+@export var CardTypesAllowed : int = 0
 
 #add maybe an area of influence, when a card is in it => start making
 # it acting differently, be more and more attracted by the dropspot center, like a blackhole
@@ -53,15 +54,26 @@ func _process(_delta: float) -> void:
 
 
 func grabObject(something : Node2D) -> void:
+	var tp : PropertyTweener
+	
 	#print("DA["+str(did)+"]: grab object="+str(something))
 	if full == false:
 		if something != null:
-			object_grabbed = something
+			object_grabbed = something as Card
 			#if something.is_inside_tree() == true:
 				#print("object already in the tree")
 				#something.get_parent().remove_child(something)
 					#make object "disappear"
 			#add_child(something)
+			if CardTypesAllowed != 0:
+				print("This dropspot only accept cards of type: "+str(CardTypesAllowed))
+				if something.Type != 0:
+					print("Card type is:"+str(something.Type))
+					if something.Type | CardTypesAllowed == 1:
+						print("Card is accepted by the drop spot")
+					else:
+						print("Card is denied")
+						return
 			
 			#print("object angle="+str(rad_to_deg(something.rotation)))
 			#print("spot angle="+str(rad_to_deg(rotation)))
@@ -70,7 +82,7 @@ func grabObject(something : Node2D) -> void:
 				#print("angles are not equal, rotate...")
 				var angle : float = rotation - something.rotation
 				animation = self.create_tween().set_parallel(false)
-				var tp : PropertyTweener = animation.parallel().tween_property(something, "rotation", angle, 0.75)
+				tp = animation.parallel().tween_property(something, "rotation", angle, 0.75)
 				tp.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 				animation.play()
 			#else:
@@ -80,7 +92,7 @@ func grabObject(something : Node2D) -> void:
 			full = true
 
 			animation = self.create_tween().set_parallel(false)
-			var tp : PropertyTweener = animation.parallel().tween_property(something, "global_position", global_position, 0.25)
+			tp = animation.parallel().tween_property(something, "global_position", global_position, 0.25)
 			tp.set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_OUT_IN)
 			something.did = did
 

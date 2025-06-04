@@ -1,6 +1,8 @@
 extends Node2D
 class_name Card
 
+enum TYPE { TYPEA = 1, TYPEB = 2, TYPEC = 4 }
+
 @export var cid : int = -1
 var did : int = -1
 
@@ -9,7 +11,7 @@ var mouseInsideCardArea : bool = false
 var dragged : bool = false
 var dropped : bool = true
 var locked : bool = false
-
+var Type : int = 0
 
 signal card_is_dropped(ref : Node2D, coordinates : Vector2)
 

@@ -5,6 +5,11 @@ extends Node2D
 
 @onready var label = $Label
 
+const additionalText : String = "Card1 is of TypeA, Card2 TypeB
+DS0 accept any type
+DS1 only TypeA
+DS2 only TypeC (so nothing here)"
+
 var cardInstance : Array = []
 var dropareaInstance : Array = []
 
@@ -40,7 +45,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	$Label.text = "Item "+str(cardInstance[0].cid)+" is on DropSpot "+str(cardInstance[0].did)+"\nItem "+str(cardInstance[1].cid)+" is on DropSpot "+str(cardInstance[1].did)
+	$Label.text = "Item "+str(cardInstance[0].cid)+" is on DropSpot "+str(cardInstance[0].did)+"\nItem "+str(cardInstance[1].cid)+" is on DropSpot "+str(cardInstance[1].did) + "\n" + additionalText
 
 
 func _on_button_pressed() -> void:

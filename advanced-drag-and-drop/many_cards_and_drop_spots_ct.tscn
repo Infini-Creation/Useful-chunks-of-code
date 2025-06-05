@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b306hyxgy0qiy" path="res://many_cards_and_drop_spots_ct.gd" id="1_8ql4n"]
 
-[node name="Many Cards and DropSpots" type="Node2D"]
+[node name="Many Cards and DropSpots CT" type="Node2D"]
 script = ExtResource("1_8ql4n")
 
 [node name="Label" type="Label" parent="."]
@@ -10,7 +10,7 @@ offset_left = 40.0
 offset_top = 42.0
 offset_right = 456.0
 offset_bottom = 131.0
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 18
 text = "Item A is on DropSpot Y
 Item B is on DropSpot Z"
 horizontal_alignment = 1

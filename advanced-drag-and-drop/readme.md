@@ -1,4 +1,4 @@
-# Advanced Darg & Drop
+# Advanced Drag & Drop
 
 This sample shows D&D feature applies to kind of card game with object to move around (cards) and drop spot offering various behaviors.
 

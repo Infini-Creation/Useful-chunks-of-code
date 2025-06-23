@@ -7,7 +7,7 @@ When a card is dragged, a feedback to user is provided with an effect, here a si
 Drop Spot are area where the card can be dropped on and can:
 * have no particular behavior, card are dropped on them and can be dragged over again freely without any restriction,
 * can hold the card, drop spot is now full and no more item can be dropped on them, card cannot be removed,
-* can only accept some type of card and denied all others
+* can only accept some type of card and denies all others
 
 
 # Playable demo

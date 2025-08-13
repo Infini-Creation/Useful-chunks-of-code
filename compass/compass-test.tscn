@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp8dkhbr1jwc2"]
+
+[ext_resource type="PackedScene" uid="uid://cuvd0gxf4e23o" path="res://compass.tscn" id="1_kumj1"]
+[ext_resource type="PackedScene" uid="uid://br7b7reou0dqi" path="res://compass-test-object.tscn" id="2_q1qrp"]
+[ext_resource type="Texture2D" uid="uid://d1y6suasxm7lf" path="res://icon.svg" id="3_jd84v"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Compass" parent="." node_paths=PackedStringArray("Target", "Owner") instance=ExtResource("1_kumj1")]
+position = Vector2(66, 62)
+Target = NodePath("../Node2D")
+Owner = NodePath("../player")
+CompassMode = 1
+Latency = 0.00900000000547152
+
+[node name="Node2D" parent="." instance=ExtResource("2_q1qrp")]
+position = Vector2(473, 105)
+
+[node name="player" type="Node2D" parent="."]
+position = Vector2(511, 289)
+
+[node name="Sprite2D" type="Sprite2D" parent="player"]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_jd84v")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = -1
+offset_left = 15.0
+offset_top = 499.0
+offset_right = 884.0
+offset_bottom = 634.0
+text = "The target (where the needle point toward) of the compass is the little smiley.
+The owner of the compass (the reference coordinates) is the Godot icon.
+
+Move the target with the mouse around and see the compass pointing towards it from the player's point of view."

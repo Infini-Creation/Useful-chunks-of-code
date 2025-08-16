@@ -10,7 +10,6 @@
 position = Vector2(66, 62)
 Target = NodePath("../Node2D")
 Owner = NodePath("../player")
-CompassMode = 1
 Latency = 0.00900000000547152
 
 [node name="Node2D" parent="." instance=ExtResource("2_q1qrp")]

@@ -18,7 +18,7 @@ var gamePaused : bool = false
 
 
 func _ready() -> void:
-	print(" M="+str(CompassMode))
+	#print(" M="+str(CompassMode))
 	if Owner == null or Target == null:
 		status = STATUS.DISABLED
 
@@ -27,7 +27,7 @@ func _ready() -> void:
 	else:
 		Latency = 0.009
 		
-	print("mode="+str(CompassMode)+"  lat="+str(Latency))
+	#print("mode="+str(CompassMode)+"  lat="+str(Latency))
 
 
 func _process(_delta: float) -> void:

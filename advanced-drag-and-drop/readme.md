@@ -9,6 +9,8 @@ Drop Spot are area where the card can be dropped on and can:
 * can hold the card, drop spot is now full and no more item can be dropped on them, card cannot be removed,
 * can only accept some type of card and denies all others
 
+# IMPORTANT NOTICE:
+This method doesn't really work when multiple identical or similar items are use in the same scene (inventory, cards game, ...) so it is needed to know at anytime which item is currently dragged to prevent other to get caught too while mouse cursor/touch event occured.
 
 # 1 Simple Drop Spot
 
